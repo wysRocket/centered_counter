@@ -3,10 +3,8 @@ import { factory } from "./factory";
 let count = factory(5, 8);
 
 function update_count_and_reset_counter() {
-  const start_at = start_at_control.value
-    ? parseInt(start_at_control.value)
-    : null;
-  const step = step_control.value ? parseInt(step_control.value) : null;
+  const start_at = parseInt(start_at_control.value) ?? null;
+  const step = parseInt(step_control.value) ?? null;
 
   if (start_at !== null && step !== null) {
     count = factory(start_at, step);
