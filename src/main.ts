@@ -1,27 +1,35 @@
 import { factory } from "./factory";
 
-let count = factory(0, 1);
+let count = factory(5, 8);
 
-function update_count_and_reset_counter() {}
+function update_count_and_reset_counter() {
+  const start_at = parseInt(start_at_control.value) ?? null;
+  const step = parseInt(step_control.value) ?? null;
+
+  if (start_at !== null && step !== null) {
+    count = factory(start_at, step);
+    current_count.textContent = start_at.toString();
+  }
+}
 
 const start_at_control = document.getElementById(
-  "start_at",
+  "start_at"
 ) as HTMLInputElement;
-
 const step_control = document.getElementById("step") as HTMLInputElement;
-
-start_at_control?.addEventListener("change", () => {});
-
-step_control?.addEventListener("change", () => {});
-
 const count_button = document.querySelector(
-  ".count_button",
+  ".count_button"
 ) as HTMLButtonElement;
-
 const current_count = document.querySelector(
-  ".current_count",
+  ".current_count"
 ) as HTMLSpanElement;
 
-function update_count() {}
+start_at_control.addEventListener("change", update_count_and_reset_counter);
+step_control.addEventListener("change", update_count_and_reset_counter);
 
-count_button.addEventListener("click", update_count);
+count_button.addEventListener("click", () => {
+  const result = count();
+  current_count.textContent = result.toString();
+});
+
+// Initialize with default values
+current_count.textContent = "5";
